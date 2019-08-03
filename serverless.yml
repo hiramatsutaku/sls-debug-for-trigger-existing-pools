@@ -1,0 +1,16 @@
+service: sample
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: nodejs10.x
+  profile: ${opt:profile}
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - cognitoUserPool:
+          pool: sample
+          trigger: PostConfirmation
+          existing: true
